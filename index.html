@@ -4,8 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hena | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #eaddcf;
+      --text: #2e2e2e;
+      --accent: #a68a7f;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,87 +21,105 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #ffffff;
-      color: #111;
+      background-color: var(--bg);
+      color: var(--text);
     }
 
     nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
+      text-align: center;
+      padding: 20px;
       background-color: #fff;
-      border-bottom: 1px solid #eee;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      font-size: 0.95rem;
-      z-index: 999;
+      border-bottom: 1px solid #ccc;
+      font-weight: 600;
     }
 
     nav a {
       text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      transition: color 0.3s;
+      color: var(--text);
+      margin: 0 15px;
+      text-transform: uppercase;
+      font-size: 0.95rem;
     }
 
     nav a:hover {
-      color: #6c63ff;
+      color: var(--accent);
     }
 
-    header.hero {
-      padding: 120px 20px 80px;
-    }
-
-    .hero-container {
+    .hero {
       display: flex;
-      align-items: center;
+      flex-direction: row;
       justify-content: center;
-      max-width: 1100px;
+      align-items: center;
+      padding: 100px 40px;
+      max-width: 1200px;
       margin: auto;
       flex-wrap: wrap;
-      gap: 40px;
-    }
-
-    .hero-photo img {
-      width: 250px;
-      height: auto;
-      border-radius: 8px;
-      object-fit: cover;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
 
     .hero-text {
       flex: 1;
-      max-width: 550px;
+      min-width: 300px;
+      padding-right: 30px;
     }
 
     .hero-text h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-bottom: 20px;
     }
 
     .hero-text p {
       font-size: 1.1rem;
       line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .hero-text .name {
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
+    .hero-img {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .hero-img img {
+      width: 100%;
+      max-width: 350px;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
     section {
-      padding: 100px 20px;
-      max-width: 900px;
+      padding: 80px 20px;
+      max-width: 1000px;
       margin: auto;
     }
 
-    h2 {
-      font-size: 1.8rem;
+    section h2 {
+      text-transform: uppercase;
+      font-size: 1.5rem;
       margin-bottom: 20px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 6px;
     }
 
     a {
-      color: #6c63ff;
+      color: var(--accent);
+    }
+
+    @media screen and (max-width: 768px) {
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .hero-text {
+        padding: 0;
+      }
     }
   </style>
 </head>
@@ -109,28 +133,27 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <header class="hero">
-    <div class="hero-container">
-      <div class="hero-photo">
-        <img src="hena-photo.png" alt="Hena's photo" />
-      </div>
-      <div class="hero-text">
-        <h1>Hello, I’m Hena</h1>
-        <p>
-          I’m a Business Administration student specializing in MIS at San Jose State University, passionate about technology, data, and process optimization. I'm eager to learn, grow, and contribute wherever business and technology meet. 💫
-        </p>
-      </div>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Hello, I’m</h1>
+      <p>
+        I’m a Business Administration student specializing in MIS at San Jose State University, passionate about technology, data, and process optimization. I'm eager to learn, grow, and contribute wherever business and technology meet. 💫
+      </p>
+      <div class="name">Hena</div>
     </div>
-  </header>
+    <div class="hero-img">
+      <img src="hena-photo.png" alt="Photo of Hena" />
+    </div>
+  </section>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>[Add more about your background, interests, or journey here]</p>
+    <p>[Add your extended bio or background here]</p>
   </section>
 
   <section id="skills">
     <h2>Skills</h2>
-    <p>[Python, SQL, Excel, Salesforce, PowerPoint, HTML/CSS, Pandas, etc.]</p>
+    <p>[Python, SQL, Salesforce, Excel, etc.]</p>
   </section>
 
   <section id="certifications">
@@ -147,15 +170,14 @@
 
   <section id="projects">
     <h2>Projects</h2>
-    <p>[Add your project names, brief descriptions, and links if available]</p>
+    <p>[Project cards or descriptions go here]</p>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
     <p>
       📧 Email: your.email@example.com<br>
-      🔗 LinkedIn: <a href="https://www.linkedin.com/in/your-link" target="_blank">linkedin.com/in/your-link</a><br>
-      📄 Resume: [Upload your resume and link it here]
+      🔗 LinkedIn: <a href="https://linkedin.com/in/your-link" target="_blank">linkedin.com/in/your-link</a>
     </p>
   </section>
 
