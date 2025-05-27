@@ -4,181 +4,66 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hena | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #eaddcf;
-      --text: #2e2e2e;
-      --accent: #a68a7f;
-    }
 
-    * {
+  <!-- Load JetBrains Mono font from Google -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-    }
-
-    nav {
-      text-align: center;
-      padding: 20px;
-      background-color: #fff;
-      border-bottom: 1px solid #ccc;
-      font-weight: 600;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text);
-      margin: 0 15px;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-    }
-
-    nav a:hover {
-      color: var(--accent);
+      background-color: #1e130d;
     }
 
     .hero {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
       padding: 100px 40px;
-      max-width: 1200px;
-      margin: auto;
-      flex-wrap: wrap;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
     }
 
     .hero-text {
-      flex: 1;
-      min-width: 300px;
-      padding-right: 30px;
+      max-width: 600px;
     }
 
     .hero-text h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
+      font-family: 'Migra', serif; /* placeholder font */
+      font-size: 78.5px;
+      font-weight: normal;
+      color: #fff7ef;
+      line-height: 1.2;
+      text-align: left;
     }
 
-    .hero-text p {
-      font-size: 1.1rem;
+    .italic-m,
+    .italic-e,
+    .italic-h {
+      font-style: italic;
+    }
+
+    .about-me {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16.2px;
+      color: #fff7ef;
+      margin-top: 30px;
+      text-align: left;
       line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .hero-text .name {
-      font-weight: 600;
-      font-size: 1.5rem;
-    }
-
-    .hero-img {
-      flex: 1;
-      min-width: 250px;
-    }
-
-    .hero-img img {
-      width: 100%;
-      max-width: 350px;
-      height: auto;
-      border-radius: 8px;
-      object-fit: cover;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    section {
-      padding: 80px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    section h2 {
-      text-transform: uppercase;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 6px;
-    }
-
-    a {
-      color: var(--accent);
-    }
-
-    @media screen and (max-width: 768px) {
-      .hero {
-        flex-direction: column-reverse;
-        text-align: center;
-        padding: 60px 20px;
-      }
-
-      .hero-text {
-        padding: 0;
-      }
     }
   </style>
 </head>
-<body>
 
-  <nav>
-    <a href="#about">About Me</a>
-    <a href="#skills">Skills</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<body>
 
   <section class="hero">
     <div class="hero-text">
-      <h1>Hello, I’m</h1>
-      <p>
+      <h1>
+        Hello, I<span class="italic-m">’m</span><br>
+        <span class="italic-h">H</span>ena
+      </h1>
+      <p class="about-me">
         I’m a Business Administration student specializing in MIS at San Jose State University, passionate about technology, data, and process optimization. I'm eager to learn, grow, and contribute wherever business and technology meet. 💫
       </p>
-      <div class="name">Hena</div>
     </div>
-    <div class="hero-img">
-      <img src="hena-photo.png" alt="Photo of Hena" />
-    </div>
-  </section>
-
-  <section id="about">
-    <h2>About Me</h2>
-    <p>[Add your extended bio or background here]</p>
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <p>[Python, SQL, Salesforce, Excel, etc.]</p>
-  </section>
-
-  <section id="certifications">
-    <h2>Certifications</h2>
-    <ul>
-      <li>Salesforce Agentforce Specialist (Trailhead)</li>
-      <li>Google Project Management (Coursera)</li>
-      <li>Google Data Analytics (Coursera)</li>
-      <li>Google UX Design (Coursera)</li>
-      <li>Google IT Support (Coursera)</li>
-      <li>UVA Digital Product Management (Coursera)</li>
-    </ul>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <p>[Project cards or descriptions go here]</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      📧 Email: your.email@example.com<br>
-      🔗 LinkedIn: <a href="https://linkedin.com/in/your-link" target="_blank">linkedin.com/in/your-link</a>
-    </p>
   </section>
 
 </body>
