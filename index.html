@@ -9,25 +9,36 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
 
   <style>
+    html {
+  scroll-behavior: smooth;
+}
+
     body {
       margin: 0;
       padding: 0;
       background-color: #1e130d;
+      background-image: url('BestBubbles.png');
+        background-repeat: no-repeat;
+        background-size: 1200px auto;      /* Makes the image cover the whole background */
+        background-position: 40vw 5vh; /* Centers the image */
     }
 
     .hero {
-      padding: 100px 40px;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
+        position: relative;
+        margin-top: 20vh;   /* replaces top: 20vh */
+        margin-left: 10vw;  /* replaces left: 10vw */
+        width: auto;
+        min-height: 80vh;   /* ensures it's tall */
+        padding: 0;
+        display: block;
+}
 
     .hero-text {
-      max-width: 600px;
+      max-width: 800px;
     }
 
     .hero-text h1 {
-      font-family: 'Migra', serif; /* placeholder font */
+      font-family: 'JetBrains Mono', monospace;
       font-size: 78.5px;
       font-weight: normal;
       color: #fff7ef;
@@ -35,11 +46,8 @@
       text-align: left;
     }
 
-    .italic-m,
-    .italic-e,
-    .italic-h {
-      font-style: italic;
-    }
+    
+
 
     .about-me {
       font-family: 'JetBrains Mono', monospace;
@@ -48,23 +56,348 @@
       margin-top: 30px;
       text-align: left;
       line-height: 1.6;
+      margin-left: 241px; /* 300px - 59px ≈ 241px */
     }
+    .wavy-lines-bg {
+      position: absolute; /* was: fixed */
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('WavyLines.svg') no-repeat;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      opacity: 0;
+      -webkit-mask-image: linear-gradient(to right, #fff 0%, #fff 0%, transparent 100%);
+  -webkit-mask-size: 200% 100%;
+  -webkit-mask-position: left;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(to right, #fff 0%, #fff 0%, transparent 100%);
+  mask-size: 200% 100%;
+  mask-position: left;
+  mask-repeat: no-repeat;
+  animation: revealWavy 5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+@keyframes revealWavy {
+  from {
+    -webkit-mask-size: 0% 100%;
+    mask-size: 0% 100%;
+  }
+  to {
+    -webkit-mask-size: 200% 100%;
+    mask-size: 200% 100%;
+  }
+}
+
+/* Blinking cursor for typing effect */
+.typing-cursor::after {
+  content: '|';
+  animation: blink 1s steps(1) infinite;
+  color: #fff7ef;
+  font-weight: bold;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.headshot-static {
+  position: absolute;
+  right: 0.01vw;
+  top: 14vh;
+  width: 600px;
+  height: 600px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headshot-static.revealed {
+  opacity: 1;
+}
+
+.headshot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  opacity: 0;
+  filter: blur(8px) brightness(0.7) contrast(0.7);
+  transition: none;
+}
+
+.headshot-img.revealed {
+  animation: pixelateIn 2.5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+@keyframes pixelateIn {
+  0% {
+    filter: blur(8px) brightness(0.7) contrast(0.7);
+    opacity: 0;
+  }
+  40% {
+    filter: blur(8px) brightness(1) contrast(1);
+    opacity: 1;
+  }
+  100% {
+    filter: none;
+    opacity: 1;
+  }
+}
+
+.navigation-bar-img {
+  position: fixed;
+  top: 19px;
+  left: 225px;
+  width: 70vw;
+  height: 3vw;
+  opacity: 0.75;
+  z-index: 10001; /* Increased to be above headshot */
+  pointer-events: none;
+  object-fit: fill;
+}
+
+.navigation-bar-links {
+  position: fixed;
+  top: 0.75cm;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  z-index: 10002; /* Increased to be above everything */
+  pointer-events: none;
+}
+
+.navigation-bar-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  color: #fff7ef;
+  text-decoration: none;
+  letter-spacing: 1px;
+  opacity: 0.95;
+  pointer-events: auto; /* Make links clickable */
+  transition: color 0.2s;
+}
+
+.navigation-bar-links a:hover {
+  color: #ffd6a0;
+}
+
+.navigation-bar-links a.active {
+  font-weight: bold;
+  color: #ffd6a0;
+}
+
+.arrow-absolute {
+  position: absolute;
+  top: 200px; /* Adjust as needed */
+  left: 40px; /* Adjust as needed */
+  z-index: 2000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.arrow-absolute.revealed {
+  opacity: 1;
+}
+
+.arrow-img {
+  height: 150px;          /* 1 inch = 96px */
+  width: auto;           /* Maintain aspect ratio */
+  display: block;
+}
+
+#skills-typer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 78.5px;
+  color: #fff7ef;
+  text-align: center;
+  margin-top:40px;
+  letter-spacing: 2px;
+  min-height: 1em;
+}
+
+.weblines-fade {
+  width: 100vw;
+  margin: calc(40px - 2in) auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  /* Mask for left-to-right reveal */
+  -webkit-mask-image: linear-gradient(to right, #fff 0%, #fff 0%, transparent 100%);
+  -webkit-mask-size: 0% 100%;
+  -webkit-mask-position: left;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(to right, #fff 0%, #fff 0%, transparent 100%);
+  mask-size: 0% 100%;
+  mask-position: left;
+  mask-repeat: no-repeat;
+  opacity: 0.21;
+  transition: none;
+}
+.weblines-fade.revealed {
+  animation: revealWebLines 2s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+@keyframes revealWebLines {
+  from {
+    -webkit-mask-size: 0% 100%;
+    mask-size: 0% 100%;
+  }
+  to {
+    -webkit-mask-size: 200% 100%;
+    mask-size: 200% 100%;
+  }
+}
+
+.wavy-lines-bg.fade-in {
+  opacity: 0.2;
+  transition: opacity 2s cubic-bezier(0.4,0,0.2,1);
+}
   </style>
 </head>
 
 <body>
+  <div class="wavy-lines-bg"></div>
+  
+  <div id="top"></div>
 
-  <section class="hero">
+  <section id="about" class="hero">
     <div class="hero-text">
-      <h1>
-        Hello, I<span class="italic-m">’m</span><br>
-        <span class="italic-h">H</span>ena
-      </h1>
-      <p class="about-me">
-        I’m a Business Administration student specializing in MIS at San Jose State University, passionate about technology, data, and process optimization. I'm eager to learn, grow, and contribute wherever business and technology meet. 💫
-      </p>
+      <h1 id="typeTitle"></h1>
+      <p class="about-me" id="typeAbout"></p>
+    </div>
+    <div class="arrow-absolute">
+      <img src="Arrow.png" alt="Arrow" class="arrow-img" />
     </div>
   </section>
 
+  <!-- Headshot image -->
+  <div class="headshot-static">
+    <img src="MyHeadshot.jpg" alt="Hena's Headshot" class="headshot-img" />
+  </div>
+  <div id="skills"></div>
+
+  <!-- Navigation Bar Image -->
+  <img src="NavigationBar.png" alt="Navigation Bar" class="navigation-bar-img" />
+
+  <!-- Navigation Links -->
+  <div class="navigation-bar-links">
+    <a href="#top">ABOUT ME</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#certifications">CERTIFICATIONS</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#contact">CONTACT ME</a>
+  </div>
+
+  <!-- Spacer div to push content down -->
+  <div style="height: 5vh; width: 100vw;"></div>
+
+  <div id="skills-typer" style="width:100vw; min-height:120px;"></div>
+  <div id="weblines-fade" class="weblines-fade">
+    <img src="WebLines.png" alt="Web Lines" class="weblines-img" />
+  </div>
+  <!-- Spacer div if you still want extra space below -->
+  <div style="height: 120vh; width: 100vw;"></div>
+
+  <script>
+function typeText(element, text, speed = 18, callback, keepCursor = false) {
+  element.innerHTML = "";
+  let i = 0;
+  element.classList.add('typing-cursor');
+  function type() {
+    if (i < text.length) {
+      // Handle HTML tags (like <br>)
+      if (text.substring(i, i + 4) === "<br>") {
+        element.innerHTML += "<br>";
+        i += 4;
+      } else {
+        element.innerHTML += text.charAt(i);
+        i++;
+      }
+      setTimeout(type, speed);
+    } else {
+      if (!keepCursor) element.classList.remove('typing-cursor');
+      if (callback) callback();
+    }
+  }
+  type();
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const wavy = document.querySelector('.wavy-lines-bg');
+  wavy.classList.add('fade-in');
+  const title = document.getElementById('typeTitle');
+  const aboutMe = document.getElementById('typeAbout');
+  const headshotImg = document.querySelector('.headshot-img');
+  const arrow = document.querySelector('.arrow-absolute');
+  const titleText = `Hi! I'm<br>Hena`;
+  const aboutText = `Welcome to my portfolio! 🪐 <br>
+I’m an MIS student at San Jose State University, passionate about technology, data, and process optimization. I'm eager to learn, grow, and contribute wherever business and technology meet.`;
+
+  setTimeout(function() {
+    typeText(title, titleText, 150, function() {
+      // Wait 1s before revealing the headshot
+      setTimeout(function() {
+        headshotImg.classList.add('revealed');
+      }, 1000);
+      // Fade in the arrow after the title types in (no delay)
+      arrow.classList.add('revealed');
+      setTimeout(function() {
+        typeText(aboutMe, aboutText, 77, null, true);
+      }, 1200);
+    });
+  }, 2500);
+});
+
+let skillsTyped = false;
+let weblinesAnimated = false;
+
+window.addEventListener('scroll', function() {
+  const wavy = document.querySelector('.wavy-lines-bg');
+  const skillsTyper = document.getElementById('skills-typer');
+  const weblines = document.getElementById('weblines-fade');
+  // Only animate once, and only after wavy lines have faded out
+  if (
+    wavy.classList.contains('fade-out') &&
+    skillsTyper &&
+    weblines &&
+    !weblinesAnimated &&
+    !skillsTyped
+  ) {
+    skillsTyped = true;
+    typeText(skillsTyper, "Skills", 150, null, true);
+    setTimeout(function() {
+      weblinesAnimated = true;
+      weblines.classList.add('revealed');
+    }, 2000); // 2 seconds after "Skills" starts typing
+  }
+});
+
+window.addEventListener('scroll', function() {
+  const wavy = document.querySelector('.wavy-lines-bg');
+  // Start fade-out when user scrolls down 100px (adjust
+  if (window.scrollY > 100) {
+    wavy.classList.add('fade-out');
+  } else {
+    wavy.classList.remove('fade-out');
+  }
+});
+
+document.querySelector('a[href="#top"]').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+  </script>
 </body>
 </html>
