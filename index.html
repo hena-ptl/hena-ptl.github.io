@@ -207,6 +207,7 @@
 
 .arrow-absolute.revealed {
   opacity: 1;
+  animation: popInShake 0.85s cubic-bezier(0.4,0,0.2,1) both;
 }
 
 .arrow-img {
@@ -227,7 +228,7 @@
 
 .weblines-fade {
   width: 100vw;
-  margin: calc(40px - 2in) auto 0 auto;
+  margin-top: calc(40px - 2in - 192px - 1in);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -263,6 +264,134 @@
 .wavy-lines-bg.fade-in {
   opacity: 0.2;
   transition: opacity 2s cubic-bezier(0.4,0,0.2,1);
+}
+
+.skills-row,
+.skills-row-1,
+.skills-row-2 {
+  position: relative;
+  z-index: 20;
+}
+
+.skills-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px; /* 36px * 2.5 = 90px */
+  width: 100vw;
+}
+
+.skills-row-1 {
+  margin-top: 72px; /* 3/4 inch = 72px (1in = 96px) below "Skills" */
+}
+
+.skills-row-2 {
+  margin-top: 56.7px; /* 1.5cm = 56.7px below first row */
+}
+
+.skill-icon {
+  height: 111px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px #0008);
+  background: transparent;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+
+.skill-icon:hover {
+  transform: scale(1.15);
+  z-index: 2;
+}
+
+.skill-icon-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.skill-icon-wrapper.pop-in {
+  animation: popIn 0.45s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.hover-card {
+  display: none;
+  position: absolute;
+  bottom: -48px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff7ef;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 17px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px #0007;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.skill-icon-wrapper.show-hover-card .hover-card {
+  display: block;
+  opacity: 1;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes popInShake {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateX(0);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.15) translateX(0);
+  }
+  60% {
+    transform: scale(1) translateX(-6px);
+  }
+  70% {
+    transform: scale(1) translateX(5px);
+  }
+  80% {
+    transform: scale(1) translateX(-3px);
+  }
+  90% {
+    transform: scale(1) translateX(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+#sparkle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
 }
   </style>
 </head>
@@ -304,11 +433,69 @@
   <div style="height: 5vh; width: 100vw;"></div>
 
   <div id="skills-typer" style="width:100vw; min-height:120px;"></div>
+
+  <!-- Skill Icons Row 1 -->
+<div id="skills-section" style="position: relative;">
+  <div class="skills-row skills-row-1">
+    <div class="skill-icon-wrapper">
+      <img src="Java.png" alt="Java" class="skill-icon" />
+      <div class="hover-card">JavaScript</div>
+    </div>
+    <div class="skill-icon-wrapper">
+      <img src="Python.png" alt="Python" class="skill-icon" />
+      <div class="hover-card">Python</div>
+    </div>
+    <div class="skill-icon-wrapper">
+      <img src="MySQL.png" alt="MySQL" class="skill-icon" />
+      <div class="hover-card">MySQL</div>
+    </div>
+    <div class="skill-icon-wrapper">
+      <img src="OracleSQL.png" alt="Oracle SQL" class="skill-icon" />
+      <div class="hover-card">Oracle Live SQL</div>
+    </div>
+  </div>
+  <div class="skills-row skills-row-2">
+    <div class="skill-icon-wrapper">
+      <img src="HTMLCSS.png" alt="HTML/CSS" class="skill-icon" />
+      <div class="hover-card">HTML and CSS</div>
+    </div>
+    <div class="skill-icon-wrapper">
+      <img src="EXcel.png" alt="Excel" class="skill-icon" />
+      <div class="hover-card">Microsoft Excel</div>
+    </div>
+    <div class="skill-icon-wrapper">
+      <img src="Access.png" alt="Access" class="skill-icon" />
+      <div class="hover-card">Microsoft Access</div>
+    </div>
+    <div class="skill-icon-wrapper">
+      <img src="Jira.png" alt="Jira" class="skill-icon" />
+      <div class="hover-card">Jira/Project Management</div>
+    </div>
+  </div>
   <div id="weblines-fade" class="weblines-fade">
     <img src="WebLines.png" alt="Web Lines" class="weblines-img" />
   </div>
+  <div id="certifications-typer"
+       style="
+         font-family: 'JetBrains Mono', monospace;
+         font-size: 78.5px;
+         color: #fff7ef;
+         text-align: center;
+         width: 100vw;
+         min-height: 1em;
+         position: absolute;
+         left: 0;
+         z-index: 20;
+         top: 0;
+         pointer-events: none;
+       ">
+  </div>
+</div>
+
   <!-- Spacer div if you still want extra space below -->
   <div style="height: 120vh; width: 100vw;"></div>
+
+  <canvas id="sparkle-canvas"></canvas>
 
   <script>
 function typeText(element, text, speed = 18, callback, keepCursor = false) {
@@ -341,6 +528,27 @@ window.addEventListener('DOMContentLoaded', function() {
   const aboutMe = document.getElementById('typeAbout');
   const headshotImg = document.querySelector('.headshot-img');
   const arrow = document.querySelector('.arrow-absolute');
+  const cert = document.getElementById('certifications-typer');
+  const lastRow = document.querySelector('.skills-row-2');
+  let certificationsTyped = false;
+
+  if (cert && lastRow) {
+    // 2 inches = 192px
+    cert.style.top = (lastRow.offsetTop + lastRow.offsetHeight + 192) + "px";
+
+    function checkCertTrigger() {
+      const rect = lastRow.getBoundingClientRect();
+      // If the bottom of the last row is above the top of the viewport, user has scrolled past it
+      if (rect.bottom < 0 && !certificationsTyped) {
+        certificationsTyped = true;
+        typeText(cert, "Certifications", 150, null, true);
+        window.removeEventListener('scroll', checkCertTrigger);
+      }
+    }
+
+    window.addEventListener('scroll', checkCertTrigger);
+  }
+
   const titleText = `Hi! I'm<br>Hena`;
   const aboutText = `Welcome to my portfolio! 🪐 <br>
 I’m an MIS student at San Jose State University, passionate about technology, data, and process optimization. I'm eager to learn, grow, and contribute wherever business and technology meet.`;
@@ -376,7 +584,9 @@ window.addEventListener('scroll', function() {
     !skillsTyped
   ) {
     skillsTyped = true;
-    typeText(skillsTyper, "Skills", 150, null, true);
+    typeText(skillsTyper, "Skills", 150, function() {
+      popInSkillsIcons(); // Pop in icons after typing "Skills"
+    }, true);
     setTimeout(function() {
       weblinesAnimated = true;
       weblines.classList.add('revealed');
@@ -398,6 +608,164 @@ document.querySelector('a[href="#top"]').addEventListener('click', function(e) {
   e.preventDefault();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+document.querySelector('a[href="#skills"]').addEventListener('click', function(e) {
+  e.preventDefault();
+  const skillsSection = document.getElementById('skills');
+  if (skillsSection) {
+    const rect = skillsSection.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    // 1.5cm ≈ 56.7px (1cm = 37.8px)
+    const offset = 56.7;
+    window.scrollTo({
+      top: rect.top + scrollTop - offset,
+      behavior: 'smooth'
+    });
+  }
+});
+
+document.querySelector('a[href="#certifications"]').addEventListener('click', function(e) {
+  e.preventDefault();
+  certificationsClicked = true;
+  const lastRow = document.querySelector('.skills-row-2');
+  if (lastRow) {
+    const rect = lastRow.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    // Scroll so the bottom of row 2 is at the top of the viewport + 2cm (≈56.7px)
+    window.scrollTo({
+      top: rect.bottom + scrollTop + 56.7,
+      behavior: 'smooth'
+    });
+  }
+});
+
+let autoScrolledToSkills = false;
+let certificationsClicked = false;
+
+window.addEventListener('scroll', function() {
+  // Only trigger if not already auto-scrolled, user is near the top, and certifications tab wasn't just clicked
+  if (!autoScrolledToSkills && !certificationsClicked && window.scrollY > 30 && window.scrollY < 200) {
+    autoScrolledToSkills = true;
+    const skillsSection = document.getElementById('skills');
+    if (skillsSection) {
+      const rect = skillsSection.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      // 1.5cm ≈ 56.7px (1cm = 37.8px)
+      const offset = 56.7;
+      window.scrollTo({
+        top: rect.top + scrollTop - offset,
+        behavior: 'smooth'
+      });
+    }
+  }
+});
+
+document.querySelectorAll('.skill-icon-wrapper').forEach(wrapper => {
+  let timer;
+  const showDelay = 750; // 0.75 seconds
+
+  wrapper.addEventListener('mouseenter', () => {
+    timer = setTimeout(() => {
+      wrapper.classList.add('show-hover-card');
+    }, showDelay);
+  });
+
+  wrapper.addEventListener('mouseleave', () => {
+    clearTimeout(timer);
+    wrapper.classList.remove('show-hover-card');
+  });
+});
+
+function popInSkillsIcons() {
+  const wrappers = [
+    ...document.querySelectorAll('.skills-row-1 .skill-icon-wrapper'),
+    ...document.querySelectorAll('.skills-row-2 .skill-icon-wrapper')
+  ];
+  wrappers.forEach((wrapper, i) => {
+    setTimeout(() => {
+      wrapper.classList.add('pop-in');
+    }, i * 400); // 0.4s between each icon
+  });
+}
+
+const canvas = document.getElementById("sparkle-canvas");
+const ctx = canvas.getContext("2d");
+let particles = [];
+let trailActive = false;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+const headshot = document.querySelector('.headshot-img');
+
+if (headshot) {
+  headshot.addEventListener("mouseenter", () => { trailActive = true; });
+  headshot.addEventListener("mouseleave", () => { trailActive = false; });
+  headshot.addEventListener("mousemove", (e) => {
+    if (trailActive) {
+      // Add an offset to x (+40 for better centering)
+      const x = e.clientX + 40;
+      const y = e.clientY;
+      for (let i = 0; i < 3; i++) {
+        particles.push(new Particle(x, y));
+      }
+    }
+  });
+}
+
+class Particle {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.radius = Math.random() * 2 + 2;
+    this.opacity = 1;
+    this.fade = 0.016; // 10% slower fade (was 0.018)
+    this.velocityX = (Math.random() - 0.5) * 2;
+    this.velocityY = (Math.random() - 0.5) * 2;
+    this.color = Math.random() < 0.2 ? "#fff" : "#F7E6CA";
+    this.shadow = this.color;
+  }
+
+  draw() {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.globalAlpha = this.opacity * 0.9; // Reduce opacity by 10%
+    ctx.fillStyle = this.color;
+    ctx.shadowColor = this.shadow;
+    ctx.shadowBlur = 24;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+
+  update() {
+    this.x += this.velocityX;
+    this.y += this.velocityY;
+    this.opacity -= this.fade;
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((p) => {
+    p.update();
+    p.draw();
+  });
+  // Remove particles before they get too transparent (was 0.05)
+  particles = particles.filter(p => p.opacity > 0.045);
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.history.scrollRestoration = "manual";
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+};
   </script>
 </body>
 </html>
